@@ -42,7 +42,7 @@ jobs:
  
     - name: Terraform Plan
       id: plan
-      run: terraform plan
+      run: terraform plan -out=tfplan
       working-directory: ./Terraform-Loganalytics
 
    
