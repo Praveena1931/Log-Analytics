@@ -39,7 +39,9 @@ jobs:
 
     # Run Terraform Plan
     - name: Terraform Plan
-      run: terraform plan -out=tfplan
+      id: plan
+      run: terraform plan
+      working-directory: ./Terraform-Loganalytics
 
     # Apply Terraform Plan
     - name: Terraform Apply
