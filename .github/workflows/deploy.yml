@@ -46,3 +46,4 @@ jobs:
     # Apply Terraform Plan
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
+      working-directory: ./Terraform-Loganalytics
