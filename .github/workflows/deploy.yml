@@ -52,7 +52,7 @@ jobs:
           infracost breakdown --path tfplan.out --format json > infracost_output.json
 
     - name: Upload Infracost Output as Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
           name: infracost-output
           path: infracost_output.json
