@@ -2,16 +2,36 @@ name: Terraform Azure Deployment
 
 on:
   push:
-  #workflow_dispatch:  
-    #branches:
-    #  - main
-  pull_request:
-    branches:
-      - main
+      
+  workflow_dispatch:  
+      #- main 
+      
+  #pull_request:
+  #  branches:
+  #    - main
+    inputs:
+      environment:
+        description: "Target environment (dev or prod)"
+        required: true
+        default: "dev"
+      confirm_apply:
+        description: "Type 'yes' to apply resources"
+        required: true
+        default: "no"
 
+       
 jobs:
   terraform:
     runs-on: ubuntu-latest
+
+    env:
+       ENV: ${{ github.event.inputs.environment || 'dev' }}   
+    defaults:
+      run:
+        working-directory: terraform/environments
+    
+    #outputs:
+    #  tfplan-exists: ${{ steps.tfplan.outputs.plan_created }}
 
     steps:
     
