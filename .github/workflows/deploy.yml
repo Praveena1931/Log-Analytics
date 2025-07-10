@@ -1,9 +1,9 @@
 name: Terraform Azure Deployment
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  
+    #branches:
+    #  - main
   pull_request:
     branches:
       - main
@@ -42,10 +42,23 @@ jobs:
  
     - name: Terraform Plan
       id: plan
-      run: terraform plan -out=tfplan
+      run: terraform plan -out=tfplan.out
       working-directory: ./Terraform-Loganalytics
 
+    - name: Run Infracost Breakdown
+      run: |
+          INFRACOST_API_KEY: ${{secrets.INFRACOST_API_KEY}}  
+          infracost breakdown --path tfplan.out --format json > infracost_output.json
+
+    - name: Upload Infracost Output as Artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: infracost-output
+          path: infracost_output.json
+
+
+    
    
-    - name: Terraform Apply
-      run: terraform apply -auto-approve tfplan
-      working-directory: ./Terraform-Loganalytics
+    #- name: Terraform Apply
+    #  run: terraform apply -auto-approve tfplan
+    #  working-directory: ./Terraform-Loganalytics
