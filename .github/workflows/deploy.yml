@@ -1,9 +1,9 @@
-name: Terraform CosmosDB CI/CD
+name: Terraform Log Analytics
 
 on:
   push:
     branches:
-      - stage
+      - feature
   workflow_dispatch:
     inputs:
       environment:
