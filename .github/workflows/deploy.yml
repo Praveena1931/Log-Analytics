@@ -30,8 +30,8 @@ jobs:
       run:
         working-directory: ./Terraform-Loganalytics/environments
     
-    #outputs:
-    #  tfplan-exists: ${{ steps.tfplan.outputs.plan_created }}
+    outputs:
+      tfplan-exists: ${{ steps.tfplan.outputs.plan_created }}
 
     steps:
     
